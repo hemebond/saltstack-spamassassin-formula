@@ -1,5 +1,5 @@
 ==============================
-saltstack-spamassassin-formula
+spamassassin-formula
 ==============================
 
 

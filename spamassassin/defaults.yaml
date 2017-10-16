@@ -2,31 +2,34 @@
 Debian:
   pkgs:
     - spamassassin
-    - pyzor
-    - razor
   config:
-    manage:
-      - default
-      - init_pre
-    default:
-      path: /etc/default/spamassassin
-      template_path: salt://spamassassin/files/config/default.{{ salt['grains.get']('oscodename') }}
-    init_pre:
-      path: /etc/spamassassin/init.pre
+    manage: {}
+    # manage:
+    #   - default
+    #   - init_pre
+    # default:
+    #   path: /etc/default/spamassassin
+    #   template_path: salt://spamassassin/files/config/default.{{ salt['grains.get']('oscodename') }}
+    # init_pre:
+    #   path: /etc/spamassassin/init.pre
     pyzor_dir:
       path: /etc/spamassassin/.pyzor
     razor_dir:
       path: /etc/spamassassin/.razor
     razor_agent:
       path: /etc/spamassassin/.razor/razor-agent.conf
-  configs_absent:
-    - /etc/spamassassin/local.cf
-    - /etc/spamassassin/v310.pre
-    - /etc/spamassassin/v312.pre
-    - /etc/spamassassin/v320.pre
-    - /etc/spamassassin/v330.pre
-    - /etc/spamassassin/v340.pre
-  service: {}
+  configs_absent: []
+    # - /etc/spamassassin/local.cf
+    # - /etc/spamassassin/v310.pre
+    # - /etc/spamassassin/v312.pre
+    # - /etc/spamassassin/v320.pre
+    # - /etc/spamassassin/v330.pre
+    # - /etc/spamassassin/v340.pre
+  service:
+    options:
+      - "--create-prefs"
+      - "--max-children 5"
+      - "--helper-home-dir"
   user:
     name: debian-spamd
   group:
